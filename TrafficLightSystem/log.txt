@@ -1,0 +1,4 @@
+Camera North: 2 cars - 2025-07-14 14:08:45
+Camera East: 2 cars - 2025-07-14 14:08:45
+Camera South: 2 cars - 2025-07-14 14:08:45
+Camera West: 2 cars - 2025-07-14 14:08:45

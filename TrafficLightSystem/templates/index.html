@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Traffic Light Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Adaptive Traffic Light Dashboard</h1>
+        <a href="/logout" class="logout-btn">Logout</a>
+    </header>
+    <div class="traffic-lights-container">
+        {% for direction, color in lights.items() %}
+        <div class="light">
+            <h3>{{ direction }}</h3>
+            <div class="block" id="light_{{ direction }}" class="{{ color }}"></div>
+        </div>
+        {% endfor %}
+    </div>
+    {% if camera_error %}
+    <div class="error-message" style="text-align: center; margin: 10px 0;">
+        <p>{{ camera_error }}</p>
+    </div>
+    {% endif %}
+    <div class="info-container">
+        <div class="info-panel car-count">
+            <h2>Car Counts</h2>
+            <p>Current Time: <span id="current-time">07:01 PM EEST</span></p>
+            {% for direction in ['North', 'East', 'South', 'West'] %}
+            <p id="car_{{ direction }}">Camera {{ direction }}: <span id="car_count_{{ direction }}">{{ car_counts[direction] if direction in car_counts else 0 }}</span> cars</p>
+            {% endfor %}
+        </div>
+        <div class="info-panel traffic-times">
+            <h2>Traffic Times</h2>
+            {% for direction in ['North', 'East', 'South', 'West'] %}
+            <p id="time_{{ direction }}">Time {{ direction }}: <span id="time_value_{{ direction }}">{{ times[direction] if direction in times else 'N/A' }}</span> seconds</p>
+            {% endfor %}
+        </div>
+    </div>
+    <form action="/toggle" method="get" class="toggle-form">
+        <button type="submit" class="btn">
+            {{ "Stop Blinking" if blinking else "Start Blinking Yellow" }}
+        </button>
+    </form>
+    <footer class="footer">
+        <p>© 2025 Traffic Light System. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function updateDashboard() {
+            fetch('/update')
+                .then(response => response.json())
+                .then(data => {
+                    for (let direction in data.lights) {
+                        let lightElement = document.getElementById(`light_${direction}`);
+                        if (lightElement) {
+                            if (data.blinking) {
+                                lightElement.className = 'block yellow blink';
+                            } else {
+                                lightElement.className = 'block ' + data.lights[direction];
+                                lightElement.classList.remove('blink');
+                            }
+                        }
+                    }
+                    for (let direction in data.car_counts) {
+                        let countElement = document.getElementById(`car_count_${direction}`);
+                        if (countElement) {
+                            countElement.textContent = data.car_counts[direction] || 0;
+                        }
+                    }
+                    for (let direction in data.times) {
+                        let timeElement = document.getElementById(`time_value_${direction}`);
+                        if (timeElement) {
+                            timeElement.textContent = data.times[direction] || 'N/A';
+                        }
+                    }
+                    let toggleBtn = document.querySelector('.btn');
+                    if (toggleBtn) {
+                        toggleBtn.textContent = data.blinking ? "Stop Blinking" : "Start Blinking Yellow";
+                    }
+                    if (data.camera_error) {
+                        document.querySelector('.error-message p').textContent = data.camera_error;
+                        document.querySelector('.error-message').style.display = 'block';
+                    } else {
+                        document.querySelector('.error-message').style.display = 'none';
+                    }
+                })
+                .catch(error => console.error('Eroare la actualizare:', error));
+        }
+
+        function updateTime() {
+            const now = new Date();
+            const options = { hour: '2-digit', minute: '2-digit', hour12: true, timeZoneName: 'short' };
+            const timeString = now.toLocaleTimeString('en-US', options).replace('GMT', 'EEST');
+            document.getElementById('current-time').textContent = timeString;
+        }
+
+        setInterval(updateDashboard, 2000);
+        setInterval(updateTime, 1000);
+        updateDashboard();
+        updateTime();
+    </script>
+</body>
+</html>

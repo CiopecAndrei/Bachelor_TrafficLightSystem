@@ -1,0 +1,267 @@
+/* Stiluri comune */
+body {
+    font-family: 'Roboto', sans-serif;
+    background: radial-gradient(circle, #2C3E50 20%, #ECF0F1 80%);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+header {
+    background-color: #2C3E50;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    position: relative;
+    width: 100%;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.logout-btn {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 8px 15px;
+    background-color: #e74c3c;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.logout-btn:hover {
+    background-color: #c0392b;
+}
+
+footer {
+    text-align: center;
+    padding: 20px 0;
+    color: white;
+    background-color: #2C3E50;
+}
+
+/* Stiluri pentru login.html */
+.login-container {
+    background: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+.login-container h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #D0E6F0;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+    border-color: #2C3E50;
+    outline: none;
+}
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #ECF0F1;
+    border: none;
+    color: #000;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #4C5D70;
+    color: #D0E6F0;
+}
+
+.error-message {
+    color: #e74a3b;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* Stiluri pentru index.html */
+.traffic-lights-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    background: radial-gradient(circle, #2C3E50 20%, #ECF0F1 80%);
+    margin: 0 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.light {
+    margin: 0 20px;
+    text-align: center;
+}
+
+.light h3 {
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 800;
+    color: #fff;
+}
+
+.block {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto;
+    border-radius: 10px;
+    border: 2px solid #34495e;
+    transition: opacity 0.5s;
+}
+
+.block.red {
+    background: #d32f2f;
+}
+
+.block.green {
+    background: #388e3c;
+}
+
+.block.yellow {
+    background: #ffb300;
+}
+
+/* Efect de clipire */
+.block.blink {
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+.info-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto 20px;
+    gap: 40px;
+}
+
+.info-panel {
+    flex: 1;
+    min-width: 700px;
+    background: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.info-panel h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.info-panel p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #555;
+}
+
+.traffic-times, .car-count{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+}
+
+.time{
+    font-size: 18px;
+    font-weight: 600;
+    color: #ECF0F1;
+    text-align: center;
+}
+
+.car-count p, .traffic-times p {
+    margin: 10px 0;
+}
+
+.toggle-form {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.toggle-btn {
+    padding: 12px 25px;
+    font-size: 16px;
+    background-color: #ECF0F1;
+    border: none;
+    color: #000;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+}
+
+.toggle-btn:hover {
+    background-color: #4C5D70;
+    color: #D0E6F0;
+}
+
+@media (max-width: 768px) {
+    .traffic-lights-container {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+    .light {
+        margin: 10px 0;
+    }
+    .info-container {
+        flex-direction: column;
+        padding: 10px;
+    }
+    .info-panel {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .login-container {
+        width: 90%;
+        margin: 0 auto;
+    }
+}
